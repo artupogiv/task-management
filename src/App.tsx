@@ -5,6 +5,7 @@ const taskItems = [
   { id: 2, text: "Mengerjakan Tugas", isCompleted: true },
   { id: 2, text: "Belajar Typescript", isCompleted: false },
 ];
+
 export function App() {
   return (
     <div>
