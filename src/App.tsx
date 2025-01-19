@@ -1,10 +1,17 @@
-import { TaskList } from "./data/task-list";
+import { TaskList } from "./components/task-list";
 import { Footer } from "./components/footer";
+import { Button } from "./components/ui/button";
+import { PlusIcon } from "lucide-react";
 
-const taskItems = [
-  { id: 1, text: "Baca Dokumentasi React", isCompleted: true },
-  { id: 2, text: "Mengerjakan Tugas", isCompleted: true },
-  { id: 3, text: "Belajar Typescript", isCompleted: false },
+const initialTaskItems = [
+  {
+    id: 1,
+    text: "Baca Dokumentasi React",
+    isCompleted: true,
+    date: new Date(),
+  },
+  { id: 2, text: "Mengerjakan Tugas", isCompleted: false, date: new Date() },
+  { id: 3, text: "Belajar Typescript", isCompleted: false, date: new Date() },
 ];
 
 export function App() {
@@ -26,9 +33,9 @@ export function App() {
           placeholder="Search Task..."
           className="w-1/5 p-0 border border-gray-300 rounded-lg"
         />
-        <button className="border border-neutral-300 rounded-lg py-1.5 px-10 my-2 bg-gray-700 hover:bg-black text-white font-semibold ">
-          + Add new task
-        </button>
+        <Button>
+          <PlusIcon /> Add task
+        </Button>
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-gray-500">
@@ -48,7 +55,7 @@ export function App() {
             </tr>
           </thead>
           <tbody>
-            <TaskList taskItems={taskItems} />
+            <TaskList taskItems={initialTaskItems} />
           </tbody>
         </table>
       </div>
