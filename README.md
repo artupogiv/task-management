@@ -4,7 +4,7 @@ This task management app is built to evaluation my skill about ReactJS. In this 
 
 ## URL
 
-This task management project deploy with Vercel with the URL: https://address-book-dusky.vercel.app
+This task management project deploy with Vercel with the URL: https://task-management-artupogiv.vercel.app
 
 ## Features
 

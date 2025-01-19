@@ -12,22 +12,22 @@ export function App() {
     <div className="m-0 p-8 gap-4 ">
       <header className="py-5">
         <h1 className="text-4xl font-medium text-cyan-700 text-left">
-          Incident Management
+          Task Management
         </h1>
       </header>
 
       <p className="read-the-docs text-base font-normal ">
-        Application to manage incident ...
+        Application to manage task...
       </p>
 
       <div className="flex justify-between my-4 ">
         <input
           type="text"
-          placeholder="Search Incident ..."
+          placeholder="Search Task..."
           className="w-1/5 p-0 border border-gray-300 rounded-lg"
         />
         <button className="border border-neutral-300 rounded-lg py-1.5 px-10 my-2 bg-gray-700 hover:bg-black text-white font-semibold ">
-          Add incident
+          + Add new task
         </button>
       </div>
 
@@ -36,7 +36,7 @@ export function App() {
           <thead>
             <tr className=" border-gray-500 ">
               <th className="px-4 py-2 text-left text-gray-600 border-b border-gray-500 sortable cursor-pointer ">
-                Incident ID
+                TaskID
               </th>
               <th className="px-4 py-2 text-left text-gray-600 border-b border-gray-500 sortable cursor-pointer ">
                 Summary
