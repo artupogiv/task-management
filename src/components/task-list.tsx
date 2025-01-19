@@ -1,8 +1,8 @@
-import { type TaskItem } from "../types/tasks";
-import { TaskListItem } from "./task-list-item";
+import { type Task } from "@/types/tasks";
+import { TaskListItem } from "@/components/task-list-item";
 
 type TaskItemsProps = {
-  taskItems: TaskItem[];
+  taskItems: Task[];
 };
 
 export function TaskList({ taskItems }: TaskItemsProps) {
