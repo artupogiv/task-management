@@ -7,14 +7,12 @@ type TaskItemsProps = {
 
 export function TaskList({ taskItems }: TaskItemsProps) {
   return (
-    <ul>
-      {taskItems.map((taskItem) => {
+    <ul className="space-y-2">
+      {taskItems.map((taskItems) => {
         return (
-          <TaskListItem
-            key={taskItem.id}
-            text={taskItem.text}
-            isCompleted={taskItem.isCompleted}
-          />
+          <li key={taskItems.id}>
+            <TaskListItem taskItem={taskItems}/>
+          </li>
         );
       })}
     </ul>

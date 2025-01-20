@@ -2,9 +2,47 @@ import { Footer } from "./components/footer";
 import { Button } from "./components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { Input } from "./components/ui/input";
-import { TableComponent } from "./components/table-component";
+import { type Task } from "./types/tasks";
+import { useState } from "react";
+import { TaskList } from "./components/task-list";
+
+const initialTaskItems : Task[] = [
+  {
+    id: 1,
+    text: "Baca Dokumentasi React",
+    isCompleted: true,
+    date: new Date(),
+  },
+  {
+    id: 2,
+    text: "Mengerjakan Tugas",
+    isCompleted: false,
+    date: new Date(),
+  },
+  {
+    id: 3,
+    text: "Belajar Typescript",
+    isCompleted: false,
+    date: new Date(),
+  },
+]
 
 export function App() {
+  const [taskItems, setTaskItems] = useState(initialTaskItems);
+
+  function addTaskItem() {
+    const newTaskItem = {
+      id: taskItems[taskItems.length - 1].id + 1,
+      text: "Task baru",
+      isCompleted: false,
+      date: new Date(),
+    };
+
+    const updateTaskItems = [...taskItems, newTaskItem];
+
+    setTaskItems(updateTaskItems);
+  }
+
   return (
     <div className="m-0 p-8 gap-4 ">
       <header className="py-5">
@@ -19,14 +57,12 @@ export function App() {
 
       <div className="flex justify-between my-4 w-full ">
         <Input placeholder="Search task..." className="w-[12.5rem]" />
-        <Button>
+        <Button onClick={addTaskItem}>
           <PlusIcon /> New task
         </Button>
       </div>
 
-      <div>
-        <TableComponent />
-      </div>
+      <TaskList taskItems={taskItems}/>
 
       <Footer />
     </div>
