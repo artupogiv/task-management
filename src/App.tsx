@@ -9,15 +9,30 @@ import { Button } from "./components/ui/button";
 export function App() {
   const [tasks, setTasks] = useState(initialTasks);
 
+  function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    console.log("Add Task");
+  }
+
   return (
     <div className="w-full max-w-5xl mx-auto ">
       <Heading />
 
       <div className="flex gap-10">
-        <form className="max-w-xs w-full space-y-2">
+        <form
+          method="POST"
+          onSubmit={handleAddTask}
+          className="max-w-xs w-full space-y-2"
+        >
           <div>
             <Label htmlFor="title">Task title</Label>
-            <Input id="title" type="text" placeholder="Makan malam" />
+            <Input
+              name="title"
+              id="title"
+              type="text"
+              placeholder="Makan malam"
+            />
           </div>
           <Button type="submit">Add task</Button>
         </form>
