@@ -13,4 +13,8 @@ export const initialTasks: Task[] = [
     id: 3,
     title: "Bring docs",
   },
+  {
+    id: 4,
+    title: "Eat lunch",
+  },
 ];

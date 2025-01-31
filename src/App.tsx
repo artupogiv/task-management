@@ -12,7 +12,16 @@ export function App() {
   function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log("Add Task");
+    const formData = new FormData(event.currentTarget);
+
+    const newTask = {
+      id: tasks[tasks.length - 1].id + 1,
+      title: String(formData.get("title")),
+    };
+
+    const updatedTasks = [...tasks, newTask];
+
+    setTasks(updatedTasks);
   }
 
   return (
