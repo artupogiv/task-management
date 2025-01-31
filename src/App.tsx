@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { initialTasks } from "./components/shared/data/initial-tasks";
 import { Footer } from "./components/shared/layout/footer";
 import { Heading } from "./components/shared/layout/header";
@@ -7,33 +6,14 @@ import { Label } from "./components/ui/label";
 import { Button } from "./components/ui/button";
 
 export function App() {
-  const [tasks, setTasks] = useState(initialTasks);
-
-  function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    const newTask = {
-      id: tasks[tasks.length - 1].id + 1,
-      title: String(formData.get("title")),
-    };
-
-    const updatedTasks = [...tasks, newTask];
-
-    setTasks(updatedTasks);
-  }
+  const tasks = initialTasks;
 
   return (
     <div className="w-full max-w-5xl mx-auto ">
       <Heading />
 
       <div className="flex gap-10">
-        <form
-          method="POST"
-          onSubmit={handleAddTask}
-          className="max-w-xs w-full space-y-2"
-        >
+        <form method="POST" className="max-w-xs w-full space-y-2">
           <div>
             <Label htmlFor="title">Task title</Label>
             <Input
