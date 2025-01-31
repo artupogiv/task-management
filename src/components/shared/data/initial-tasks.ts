@@ -4,17 +4,19 @@ export const initialTasks: Task[] = [
   {
     id: 1,
     title: "Morning run",
+    description: "Running for 45 minutes",
+    isCompleted: true,
   },
   {
     id: 2,
     title: "Buy groceries",
+    description: "Buy fruits and vegetables",
+    isCompleted: true,
   },
   {
     id: 3,
     title: "Bring docs",
-  },
-  {
-    id: 4,
-    title: "Eat lunch",
+    description: "Bring documents to the office",
+    isCompleted: true,
   },
 ];
