@@ -17,6 +17,6 @@ export const initialTasks: Task[] = [
     id: 3,
     title: "Bring docs",
     description: "Bring documents to the office",
-    isCompleted: true,
+    isCompleted: false,
   },
 ];

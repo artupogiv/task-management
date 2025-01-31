@@ -9,41 +9,41 @@ import { useState } from "react";
 import { Checkbox } from "./components/ui/checkbox";
 
 export function App() {
-  const [tasks, setTask] = useState(initialTasks);
+  const [tasks, setTasks] = useState(initialTasks);
 
-  function handleAddTask(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(event.currentTarget);
 
     const newTask = {
-      id: tasks[tasks.length - 1].id + 1,
+      id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
       title: String(formData.get("title")),
       description: String(formData.get("description")),
       isCompleted: false,
     };
 
-    const updatedTask = [...tasks, newTask];
+    const updatedTasks = [...tasks, newTask];
 
-    setTask(updatedTask);
+    setTasks(updatedTasks);
 
-    e.currentTarget.reset();
+    event.currentTarget.reset();
   }
 
   function handeDeleteTask(id: number) {
     const updatedTask = tasks.filter((task) => task.id !== id);
-    setTask(updatedTask);
+    setTasks(updatedTask);
   }
 
-  function taskCompleted(id: number) {
+  function completeTask(id: number) {
     const updatedTask = tasks.map((task) => {
       if (task.id === id) {
-      return {...task, completed: !task.isCompleted}
-    }
-    return task;
-    })
-    
-    setTask(updatedTask);
+        return { ...task, iscompleted: !task.isCompleted };
+      }
+      return task;
+    });
+
+    setTasks(updatedTask);
   }
 
   return (
@@ -86,13 +86,26 @@ export function App() {
                 <li key={task.id}>
                   <div className="inline-flex gap-4 items-center">
                     <div>
-                      <Checkbox id="isCompleted" name="isCompleted" onClick={() => taskCompleted(task.id)} />
+                      <Checkbox
+                        id="isCompleted"
+                        name="isCompleted"
+                        onClick={() => completeTask(task.id)}
+                        defaultChecked={task.isCompleted}
+                      />
                     </div>
                     <div>
-                      <h2 className="font-bold">{task.title}</h2>
+                      <h2 className="font-bold">
+                      {task.isCompleted && <s>{task.title}</s>}
+                      {!task.isCompleted && <span>{task.title}</span>}
+                      </h2>
                       <p>{task.description}</p>
                     </div>
-                    <Button variant={"destructive"} onClick={() => handeDeleteTask(task.id)}>Delete</Button>
+                    <Button
+                      variant={"destructive"}
+                      onClick={() => handeDeleteTask(task.id)}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </li>
               );
