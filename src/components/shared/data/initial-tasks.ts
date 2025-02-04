@@ -11,7 +11,7 @@ export const initialTasks: Task[] = [
     id: 2,
     title: "Buy groceries",
     description: "Buy fruits and vegetables",
-    isCompleted: true,
+    isCompleted: false,
   },
   {
     id: 3,

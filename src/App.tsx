@@ -7,10 +7,12 @@ import { Button } from "./components/ui/button";
 import { Textarea } from "./components/ui/textarea";
 import { useState } from "react";
 import { Checkbox } from "./components/ui/checkbox";
+import { Task } from "./types/task";
 
 export function App() {
-  const [tasks, setTasks] = useState(initialTasks);
 
+  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  
   function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -31,19 +33,21 @@ export function App() {
   }
 
   function handeDeleteTask(id: number) {
-    const updatedTask = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTask);
+
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
   }
 
   function completeTask(id: number) {
-    const updatedTask = tasks.map((task) => {
+    const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, iscompleted: !task.isCompleted };
+        return { ...task, isCompleted: !task.isCompleted };
+
       }
       return task;
     });
 
-    setTasks(updatedTask);
+    setTasks(updatedTasks);
   }
 
   return (
@@ -95,8 +99,8 @@ export function App() {
                     </div>
                     <div>
                       <h2 className="font-bold">
-                      {task.isCompleted && <s>{task.title}</s>}
-                      {!task.isCompleted && <span>{task.title}</span>}
+                        {task.isCompleted && <s>{task.title}</s>}
+                        {!task.isCompleted && <span>{task.title}</span>}
                       </h2>
                       <p>{task.description}</p>
                     </div>
