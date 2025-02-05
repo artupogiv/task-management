@@ -4,17 +4,14 @@ import { Task } from "@/types/task";
 export function getTaskItemStorage() {
   const storedTask = localStorage.getItem("tasks");
 
-  const parsedTask = storedTask ? JSON.parse(storedTask) : initialTasks;
-
-  const transformedTask = parsedTask.map((task: Task) => {
-    return {
-      ...task,
-    };
-  });
-
-  return transformedTask;
+  return storedTask ? JSON.parse(storedTask) : initialTasks;
 }
 
 export function setTaskItemsStorage(tasks: Task[]) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+export function getTaskItemById(id: number) {
+  const tasks = getTaskItemStorage();
+  return tasks.find((task: Task) => task.id === id);
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Task } from "@/types/task";
-import { getTaskItemStorage } from "@/modules/task";
+import { getTaskItemStorage, setTaskItemsStorage } from "@/modules/task";
 import { Footer } from "@/components/shared/layout/footer";
 import { Heading } from "@/components/shared/layout/header";
 import { Input } from "@/components/ui/input";
@@ -11,10 +11,10 @@ import { TaskList } from "@/components/shared/tasks/task-list";
 // import { Search } from "lucide-react";
 
 export function App() {
-  const [taskItems, setTaskItems] = useState(getTaskItemStorage);
+  const [taskItems, setTaskItems] = useState(getTaskItemStorage());
 
   useEffect(() => {
-    setTaskItems(taskItems);
+    setTaskItemsStorage(taskItems);
   }, [taskItems]);
 
   function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
