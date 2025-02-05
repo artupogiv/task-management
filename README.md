@@ -18,4 +18,5 @@ This task management project deploy with Vercel with the URL: https://task-manag
 - React
 - Typescript
 - Tailwind CSS
+- shadcn/ui
 - Vercel

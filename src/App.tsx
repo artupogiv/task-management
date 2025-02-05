@@ -1,61 +1,78 @@
-import { initialTasks } from "./components/shared/data/initial-tasks";
-import { Footer } from "./components/shared/layout/footer";
-import { Heading } from "./components/shared/layout/header";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
-import { Button } from "./components/ui/button";
-import { Textarea } from "./components/ui/textarea";
-import { useState } from "react";
-import { Checkbox } from "./components/ui/checkbox";
-import { Task } from "./types/task";
+import { useEffect, useState } from "react";
+import { Task } from "@/types/task";
+import { getTaskItemStorage } from "@/modules/task";
+import { Footer } from "@/components/shared/layout/footer";
+import { Heading } from "@/components/shared/layout/header";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { TaskList } from "@/components/shared/tasks/task-list";
+// import { Search } from "lucide-react";
 
 export function App() {
+  const [taskItems, setTaskItems] = useState(getTaskItemStorage);
 
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
-  
+  useEffect(() => {
+    setTaskItems(taskItems);
+  }, [taskItems]);
+
   function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
 
     const newTask = {
-      id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
+      id: taskItems.length ? taskItems[taskItems.length - 1].id + 1 : 1,
       title: String(formData.get("title")),
       description: String(formData.get("description")),
       isCompleted: false,
     };
 
-    const updatedTasks = [...tasks, newTask];
+    const updatedTasks = [...taskItems, newTask];
 
-    setTasks(updatedTasks);
+    setTaskItems(updatedTasks);
 
     event.currentTarget.reset();
   }
 
   function handeDeleteTask(id: number) {
-
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
+    const updatedTasks = taskItems.filter((task: Task) => task.id !== id);
+    setTaskItems(updatedTasks);
   }
 
   function completeTask(id: number) {
-    const updatedTasks = tasks.map((task) => {
+    const updatedTasks = taskItems.map((task: Task) => {
       if (task.id === id) {
         return { ...task, isCompleted: !task.isCompleted };
-
       }
       return task;
     });
 
-    setTasks(updatedTasks);
+    setTaskItems(updatedTasks);
   }
 
   return (
     <div className="w-full max-w-5xl mx-auto ">
       <Heading />
-      <div className="m-4 p-4 space-y-1">
-        <p>Jumlah task: {tasks.length}</p>
-        {/* <p>Task selesai: {tasks.filter((task) => task.isCompleted).length}</p> */}
+      <div className="flex flex-row gap-10 m-4 p-4 space-y-1">
+        <div>
+          <p>Jumlah task: {taskItems.length}</p>
+          <p>
+            Task selesai:{" "}
+            {taskItems.filter((task: Task) => task.isCompleted).length}
+          </p>
+        </div>
+        {/* <div className="relative flex-1 ">
+          <Search className="absolute left-2 top-2.5 h-4 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Search tasks..."
+            className="pl-8"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div> */}
       </div>
       <div className="flex gap-10 m-4 p-4 ">
         <form
@@ -84,37 +101,11 @@ export function App() {
         </form>
 
         <div className="w-full">
-          <ul className="space-y-4">
-            {tasks.map((task) => {
-              return (
-                <li key={task.id}>
-                  <div className="inline-flex gap-4 items-center">
-                    <div>
-                      <Checkbox
-                        id="isCompleted"
-                        name="isCompleted"
-                        onClick={() => completeTask(task.id)}
-                        defaultChecked={task.isCompleted}
-                      />
-                    </div>
-                    <div>
-                      <h2 className="font-bold">
-                        {task.isCompleted && <s>{task.title}</s>}
-                        {!task.isCompleted && <span>{task.title}</span>}
-                      </h2>
-                      <p>{task.description}</p>
-                    </div>
-                    <Button
-                      variant={"destructive"}
-                      onClick={() => handeDeleteTask(task.id)}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <TaskList
+            taskItem={taskItems}
+            completeTask={completeTask}
+            handeDeleteTask={handeDeleteTask}
+          />
         </div>
       </div>
 
