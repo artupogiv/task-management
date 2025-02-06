@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { TaskList } from "@/components/shared/tasks/task-list";
-// import { Search } from "lucide-react";
 
 export function App() {
   const [taskItems, setTaskItems] = useState(getTaskItemStorage());
@@ -56,7 +55,8 @@ export function App() {
     <div className="w-full max-w-5xl mx-auto ">
       <Heading />
       <div className="flex flex-row gap-10 m-4 p-4 space-y-1">
-        <div>
+        <div className="space-y-2">
+          <span>Application to manage task...</span>
           <p>Jumlah task: {taskItems.length}</p>
           <p>
             Task selesai:{" "}
